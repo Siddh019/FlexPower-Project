@@ -194,5 +194,20 @@ The code calculates the **average hourly forecasted production** for both wind a
 The resulting DataFrame, `df_hourly_avg`, will contain the average forecasted production for each hour of the day across all days in the dataset (365 days). The values are given in **MW** and represent the **average wind and solar power forecast for each hour** of the day. The results are plotted on a graph and shown below : 
 <img width="1062" alt="Screenshot 2025-01-29 at 7 50 04 PM" src="https://github.com/user-attachments/assets/4027470b-adee-44a0-8c8e-ddd6920baf95" />
 
+### [Task 2.3](task-23)
 
+To calculate the average value of wind and solar power, the following formulas are applied:
 
+- **Wind Value (EUR)** = `Wind Day Ahead Forecast [in MWh]` × `Day Ahead Price hourly [in EUR/MWh]`
+- **PV Value (EUR)** = `PV Day Ahead Forecast [in MWh]` × `Day Ahead Price hourly [in EUR/MWh]`
+
+These values are then summed over the entire year to obtain the **total wind value** and **total PV value**.
+
+Next, the **average value per MWh** for both wind and solar is calculated as:
+
+- **Average Wind Value per MWh** = `Total Wind Value (EUR)` ÷ `Total Wind Forecast (MWh)`
+- **Average PV Value per MWh** = `Total PV Value (EUR)` ÷ `Total PV Forecast (MWh)`
+
+Finally, the overall **average Day Ahead price** is computed as the mean of the **Day Ahead Price hourly** across all hours of the year.
+
+The logic behind these calculations is to determine the **financial value** of wind and solar power, considering both the **forecasted energy production** and the corresponding **prices** for each hour. This allows us to assess how valuable wind and solar energy are in financial terms, based on their forecasted output and market prices.

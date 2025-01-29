@@ -453,7 +453,7 @@ With these considerations in mind, I believed the best course of action would be
 
 I decided to start by running a simple regression model:
 
-**Intra T+1 Qtr Price = a₁ + b₁ * Intra Qtr Price +  b₂ * Intra Hourly Price + b₃ * DA Hourly Price + b₄ * Wind DA Forecast + b₅ * PV DA Forecast + ε**
+**Intra T+1 Qtr Price = a₁ + b₁ * Intra Qtr Price +  b₂ * Intra Hourly Price + b₃ * DA Price + b₄ * Wind DA Forecast + b₅ * PV DA Forecast + ε**
 
 Initially, I applied an OLS (Ordinary Least Squares) regression. The result was an R² score of 0.65, which indicates that 65% of the next day's price could be linearly explained by the variables mentioned above. While this R² score isn’t particularly low, it isn’t extremely high either, which made me suspect that there could be a non-linear relationship between the dependent and independent variables.
 
@@ -461,7 +461,7 @@ Additionally, it’s evident that there is a high level of multicollinearity in 
 
 Given this, I decided to try other models to capture potential non-linearity. I tested a Random Forest Regression, Support Vector Regression (SVR), and Gradient Boosting Regression on the following function:
 
-**Intra T+1 Qtr Price = f(Intra Qtr Price, Intra Hourly Price, DA Hourly Price, Wind DA Forecast, PV DA Forecast, θ) + ε**
+**Intra T+1 Qtr Price = f(Intra Qtr Price, Intra Hourly Price, DA Price, Wind DA Forecast, PV DA Forecast, θ) + ε**
 
 The best result came from the Random Forest Regression, which I decided to keep in the code, as it provided the best performance. Since running all the models at once can be computationally expensive, I opted to focus on the Random Forest model for efficiency.
 
@@ -519,7 +519,7 @@ print(fitted_values_rf)
 
 After getting the fitted values the trading decisions were made using the below two simple rules:
 * If fitted value > DA Price, then buy at DA Price and sell at Intra T+1 Qtr Price
-* If fitted value < DA Price, buy at Intra Price and sell at DA Price
+* If fitted value < DA Price, buy at Intra T+1 Qtr Price and sell at DA Price
 
 
 

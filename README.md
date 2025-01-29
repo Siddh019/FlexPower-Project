@@ -184,3 +184,15 @@ Note - The mean price is used for the hour because the price remains constant th
 After applying the conversion and aggregation logic, the resulting DataFrame should look like this:
 <img width="1062" alt="Screenshot 2025-01-29 at 7 44 25 PM" src="https://github.com/user-attachments/assets/b331428a-e9ac-43c1-aadc-5633cc9af540" />
 One would expect there to be 365*24 = 8760 rows. However due to DST one hour is repeated hence there is one row less
+
+### [Task 2.2](task-22)
+
+The code calculates the **average hourly forecasted production** for both wind and solar energy (Day Ahead and Intraday forecasts) across all days (365 days). It extracts the **hour** from the `time` column and then groups the data by hour to compute the average forecast for each hour across all days. The averages are then multiplied by 4 to account for the typical hourly intervals in the data (15-minute intervals).
+
+* Expected Output:
+
+The resulting DataFrame, `df_hourly_avg`, will contain the average forecasted production for each hour of the day across all days in the dataset (365 days). The values are given in **MW** and represent the **average wind and solar power forecast for each hour** of the day. The results are plotted on a graph and shown below : 
+<img width="1062" alt="Screenshot 2025-01-29 at 7 50 04 PM" src="https://github.com/user-attachments/assets/4027470b-adee-44a0-8c8e-ddd6920baf95" />
+
+
+

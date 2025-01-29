@@ -514,7 +514,8 @@ fitted_values_rf = rf_model.predict(X)
 print("Fitted values (Random Forest):")
 print(fitted_values_rf)
  ```
-
+<img width="882" alt="Screenshot 2025-01-30 at 12 58 40 AM" src="https://github.com/user-attachments/assets/5b88cc25-5cd4-489e-a9ea-6a8de8bfe647" />
+<img width="464" alt="Screenshot 2025-01-30 at 12 59 36 AM" src="https://github.com/user-attachments/assets/a21b5c97-849d-4062-8fea-109b3e79d033" />
 
 
 

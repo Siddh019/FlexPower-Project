@@ -41,12 +41,15 @@ For this task, I used the following Python packages - pandas (for data manipulat
 The `Volume_Calculator` class is designed to calculate the total buy and sell volumes from a given trade dataset. Below is an overview of its functionality and an example usage.
 
 * Calculates Total Buy Volume
+  
 The `Buy_Volume` method filters the DataFrame for rows where the `'side'` column is `'buy'` and sums the `'quantity'` values to return the total buy volume.
 
 * Calculates Total Sell Volume
+  
 The `Sell_Volume` method filters the DataFrame for rows where the `'side'` column is `'sell'` and sums the `'quantity'` values to return the total sell volume.
 
-* Example Usage with Error Handling 
+* Example Usage with Error Handling
+  
 The example usage demonstrates how to load trade data from an SQLite database, initialize the `Volume_Calculator` with the data, calculate total buy and sell volumes, and print the results. It also includes error handling to catch issues with database queries or calculations (e.g., missing columns or data-related errors).
 
 ```python

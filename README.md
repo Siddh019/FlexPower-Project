@@ -302,7 +302,7 @@ For a given day, we find the highest Day-Ahead Price (selling price) and the cor
  Next, we identify the lowest Day-Ahead Price (buying price) before the discharge hour, i.e., between hour 0 and hour 14. For example, if the lowest price in this window is 40 EUR/MWh at hour 4, we aim to buy power at this price.
 
 **Calculate Revenue**:
-   - The revenue for this transaction is the difference between the selling price and the buying price. In this example, the revenue is:
+The revenue for this transaction is the difference between the selling price and the buying price. In this example, the revenue is:
      ```
      Revenue = Selling Price - Buying Price
      Revenue = 50 EUR/MWh - 40 EUR/MWh = 10 EUR

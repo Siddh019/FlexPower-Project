@@ -15,12 +15,12 @@
      * [Task 2.7: Trading Strategy Development](#task-27-trading-strategy-development)
 
 ## Background
-This repo consists of solutions for the tasks in [**FlexPower QuantChallenge**](https://github.com/FlexPwr/QuantChallenge). Below are simple descriptions of each task. 
+This repo consists of solutions for the tasks in [**FlexPower QuantChallenge**](https://github.com/FlexPwr/QuantChallenge). Below are descriptions of each task. 
 * Task 1
   * Task 1.1: Write two functions for compute buy and sell total volume each.
   * Task 1.2: Write a function computing Profit and Loss for each strategy (PnL)
   * Task 1.3: Expose the function written in task 2 as an entrypoint of a web application
 
-Here, I mostly used Python packages [sqlite3](https://docs.python.org/3/library/sqlite3.html) (task 1 & 2), [flask_restx](https://flask-restx.readthedocs.io/en/latest/) (task 3). Therefore, installing these packages is a prerequisite. 
+For this task, I used the following Python packages such as pandas (for data manipulation and analysis), sqlite3 (for interacting with the SQLite database), and Flask (for creating the API). Hence, installing these packages is a necessary for running the code.
 
 ## Solution

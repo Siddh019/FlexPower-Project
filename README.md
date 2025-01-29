@@ -280,4 +280,4 @@ A new column, `day_of_week`, is created in the dataset, which stores the name of
 A new column, `is_weekend`, is added to the dataset to classify each day as either "Weekday" (Monday to Friday) or "Weekend" (Saturday and Sunday). This classification is performed using a lambda function that checks if the day of the week is Saturday or Sunday.
 
 **Calculate the Average Hourly Day Ahead Price**
-- The data is grouped by `is_weekend` (Weekday or Weekend) and the average Day Ahead Price (in EUR/MWh) is calculated for each group. The result shows the mean hourly Day Ahead Price for weekdays and weekends.
+The data is grouped by `is_weekend` (Weekday or Weekend) and the average Day Ahead Price (in EUR/MWh) is calculated for each group. The result shows the mean hourly Day Ahead Price for weekdays and weekends.

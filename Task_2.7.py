@@ -1,4 +1,3 @@
-# Import required libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -30,7 +29,7 @@ selected_columns = [
     'Intraday Price Hourly  [in EUR/MWh]',
     'Day Ahead Price hourly [in EUR/MWh]',
     'Wind Day Ahead Forecast [in MW]',
-    'PV Intraday Forecast [in MW]',
+    'PV Day Ahead Forecast [in MW]',
 ]
 
 # Create a new DataFrame with the selected columns
@@ -40,9 +39,7 @@ d1 = df[selected_columns]
 new_column_names = {
     'time': 'Day T',
     'Wind Day Ahead Forecast [in MW]': 'Wind DA Forecast (MW)',
-    'Wind Intraday Forecast [in MW]': 'Wind Intra Forecast (MW)',
     'PV Day Ahead Forecast [in MW]': 'PV DA Forecast (MW)',
-    'PV Intraday Forecast [in MW]': 'PV Intra Forecast (MW)',
     'Day Ahead Price hourly [in EUR/MWh]': 'DA Price (EUR/MWh)',
     'Intraday Price Hourly  [in EUR/MWh]': 'Intra Price (EUR/MWh)',
     'Intraday Price Price Quarter Hourly  [in EUR/MWh]': 'Intra Qtr Price (EUR/MWh)'
@@ -66,7 +63,7 @@ d1.head(100)
 d1_cleaned = d1.dropna(subset=['Intra T+1 Qtr Price (EUR/MWh)'])
 
 # Define independent variables (features) and dependent variable (target)
-X = d1_cleaned[['Intra Qtr Price (EUR/MWh)', 'Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV Intra Forecast (MW)']]
+X = d1_cleaned[['Intra Qtr Price (EUR/MWh)', 'Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
 y = d1_cleaned['Intra T+1 Qtr Price (EUR/MWh)']
 
 # Add a constant term to the features (for intercept in regression model)
@@ -123,7 +120,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 # Re-clean the data and define features and target variable
 d1_cleaned = d1.dropna(subset=['Intra T+1 Qtr Price (EUR/MWh)'])
-X = d1_cleaned[['Intra Qtr Price (EUR/MWh)', 'Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV Intra Forecast (MW)']]
+X = d1_cleaned[['Intra Qtr Price (EUR/MWh)', 'Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
 y = d1_cleaned['Intra T+1 Qtr Price (EUR/MWh)']
 
 # Split the data into training and test sets (80% train, 20% test)
@@ -198,7 +195,7 @@ out_of_sample_data = d1.loc[34944:35039, [
     'Intra Price (EUR/MWh)', 
     'DA Price (EUR/MWh)', 
     'Wind DA Forecast (MW)', 
-    'PV Intra Forecast (MW)'
+    'PV DA Forecast (MW)'
 ]]
 
 # Use the trained Random Forest model to make predictions on the out-of-sample data

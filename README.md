@@ -141,4 +141,39 @@ Note: Due to some technical difficulties (i.e., a bug), I am currently unable to
 ### [Task 2: Data Analysis and Building a Trading Strategy](#task-2-data-analysis-and-building-a-trading-strategy)
 [Task_2.py](Task_2.py)
 ### [Task 2.1](task-21)
+# Task 2.1 - Total Power Forecast Calculator
+
+This task involves processing and aggregating power forecast data to compute the total power forecasts for wind and solar (PV) energy sources in MWh, accounting for specific intervals within each hour. The results are grouped by date and hour, and include both forecasted power values and price data. The final result is a DataFrame (`df_hourly`) that contains the total hourly forecasts for wind and PV energy sources in MWh, as well as the mean price values for both day-ahead and intraday prices. The output is grouped by date and hour.
+
+The code processes the input data to convert power forecasts from megawatts (MW) to megawatt-hours (MWh) on an hourly basis. 
+
+* Conversion Logic: MWh = MW * h
+
+The formula `MWh = MW * h` is used to convert power (measured in megawatts, MW) into energy (measured in megawatt-hours, MWh). This conversion is based on the relationship between power and energy, where:
+
+- **MW (megawatts)** represents the rate of power production or consumption.
+- **MWh (megawatt-hours)** represents the total amount of energy produced or consumed over a given period of time.
+
+How the Formula Works:
+
+- **Power (MW)** tells you how much energy is being produced or consumed at any given moment.
+- **Time (h)** tells you how long the power is being produced or consumed.
+
+To calculate the total energy (MWh), you simply multiply the **power (MW)** by the **duration (h)** in hours.
+
+For example, if a wind farm is producing 10 MW of power continuously for 1 hour, the total energy produced would be:
+
+
+## 2. **Convert Time Column into Date and Hour**
+
+The first step involves converting the 'time' column into a `datetime` format, then extracting the `date` and `hour` components.
+
+```python
+# Convert the 'hour' column into a datetime format (if not already in datetime format)
+df['time'] = pd.to_datetime(df['time'], format='%d/%m/%y %H:%M')
+
+# Extract the 'hour' and 'date' from the 'time' column
+df['date'] = df['time'].dt.date  # Extract just the date part (YYYY-MM-DD)
+df['hour'] = df['time'].dt.hour  # Extract the hour part (0-23)
+
 

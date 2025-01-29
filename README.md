@@ -113,3 +113,21 @@ if __name__ == "__main__":
 ```
 ### [Task 1.3](#task-13)
 [Task_1.3.py](Task_1.3.py)
+
+This project exposes a RESTful API using Flask that calculates the Profit and Loss (PnL) for a given trading strategy. The PnL is calculated based on trade data from a SQLite database and can be accessed via a simple API endpoint.
+
+* Calculate PnL for a Specific Strategy
+
+The API endpoint `/pnl/<strategy_id>` calculates and returns the PnL for a given trading strategy. It uses the `compute_pnl` function to calculate the PnL based on the trade data stored in an SQLite database.
+
+* JSON Response with PnL Data
+
+The API responds with a JSON object containing the strategy ID, the calculated PnL value, the currency unit (euro), and the timestamp of the PnL calculation in ISO 8601 format.
+
+* Error Handling and Database Connectivity
+
+The API includes error handling for both database-related issues (e.g., SQLite errors) and unexpected errors. If an error occurs, the API responds with an appropriate error message and status code.
+
+* Example Usage
+
+

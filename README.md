@@ -111,3 +111,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error reading data from SQLite: {e}")
 ```
+### [Task 1.3](#task-13)
+[Task_1.3.py](Task_1.3.py)

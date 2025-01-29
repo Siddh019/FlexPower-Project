@@ -139,4 +139,6 @@ Copy, Paste the website on your browser and you should hopefully get the desired
 
 Note: Due to some technical difficulties (i.e., a bug), I am currently unable to run the Flask app on my laptop. The output shown in the picture was generated on a friend's laptop. However, he didn't copy and paste the link into his browser, so I’m unable to confirm the exact output. Nevertheless, I am confident that the code produces the expected result, despite not being able to verify it directly due to these unfortunate circumstances.
 
-
+### [Task 2: Data Analysis and Building a Trading Strategy](#task-2-data-analysis-and-building-a-trading-strategy)
+[Task_1.py](Task_1.py)
+### [Task 2.1](task-21)

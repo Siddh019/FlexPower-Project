@@ -151,18 +151,13 @@ The code processes the input data to convert power forecasts from megawatts (MW)
 
 The formula `MWh = MW * h` is used to convert power (measured in megawatts, MW) into energy (measured in megawatt-hours, MWh). This conversion is based on the relationship between power and energy, where:
 
-- **MW (megawatts)** represents the rate of power production or consumption.
-- **MWh (megawatt-hours)** represents the total amount of energy produced or consumed over a given period of time.
+- MW (megawatts) represents the rate of power production or consumption.
+- MWh (megawatt-hours) represents the total amount of energy produced or consumed over a given period of time.
 
 How the Formula Works:
 
-- **Power (MW)** tells you how much energy is being produced or consumed at any given moment.
-- **Time (h)** tells you how long the power is being produced or consumed.
-
-To calculate the total energy (MWh), you simply multiply the **power (MW)** by the **duration (h)** in hours.
-
-For example, if a wind farm is producing 10 MW of power continuously for 1 hour, the total energy produced would be:
-
+- Power (MW) tells you how much energy is being produced or consumed at any given moment.
+- Time (h) tells you how long the power is being produced or consumed.
 
 ## 2. **Convert Time Column into Date and Hour**
 

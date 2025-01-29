@@ -422,6 +422,31 @@ Nonetheless, incorporating this factor would be an interesting extension of the 
 
 ### [Task 2.7](task-27)
 [Task_2.7.py](Task_2.7.py)
+The brief for this task was to develop a trading indicator based on specific input parameters, which would then determine position-taking (long or short) and calculate resulting trade profits. The core objective was to create a profitable trading strategy leveraging the price differences between day-ahead hourly prices and intraday hourly prices.
+
+This proved to be the most engaging task, prompting deep analysis of several crucial market mechanics. A few fundamental questions emerged regarding trade timing:
+
+* If one buy power for hour 7 on day ahead mkt today, then could one sell it on the intraday market today at any point of time, or vice versa ? 
+
+I wasn't quite sure of the answer to the above question, you see if one buys on the day ahead market then the electricity will be 'delivered' tommorow at 7, then how can one sell something today that hasn't been technically been 'delivered' to them yet or vice versa. 
+
+If a trade like above is carried out, then technically you sold electricity today when you didn't have any to begin with, and bought electricity tommorow and 'used' / delivered it nowhere. Essentially, both are open trades so to close it you have to sell/buy electricity at the imbalance price. This was my thought process anyways.
+
+Since we were asked to come up with a strategy which involved buying and selling on both the day ahead and intraday market and not settle with imbalance prices, the conclusion I came to was as follows:
+* If power is bought on the day ahead market at day t, then power has to be sold on the intra day market at day t + 1.
+* If power is sold on the day ahead market at day t, then power has to be bought on the intra day market at day t + 1. 
+
+Another question that troubled me was if one buy on either market at say hour 12 then could one have to sold it on the other market at say hour 15, or would it necessarily have to be settled and sold at hour 12. 
+
+The above transaction again opens up the question regarding carrying an open trade and settling at the imbalance price. What I mean is, if one buys power for hour 12 and doesn't sell or 'use' the power at hour 12, then won't one have to sell/settle at the imbalance price for hour 12. Or if one sells power at hour 15 when to begin with one never had / bought any power to sell in the first place so again one has to buy/settle at the imbalance price. 
+
+Since I was unsure of all this I decided that I would eliminate all uncertainty, and my trading strategy would follow the basic underlying logic described below:
+* If power is bought for hour y on the day ahead market at day t, then  power has to be sold for hour y on the intra day market at day t + 1.
+* If power is sold for hour y on the day ahead market at day t, then power has to be bought for hour y on the intra day market at day t + 1.
+
+Hence eliminating any and all concerns about settling at imbalance prices, since both are now essentially closed arbitrage trades (buy low sell high)
+
+Keeping the above in mind, I believed the best route of action would be to try and forecast the next day Intraday Quarter Hourly Price using linear regression analysis/ non linear regression analysis (machine learning) and then making a trading decision based on the forecasasted next day Intraday Quarter Hourly Price.
 
 
 

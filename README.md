@@ -283,3 +283,9 @@ Below are the results obtained after running the code:
 
 * Average Hourly Day Ahead Price during Weekdays: 104.37 EUR/MWh
 * Average Hourly Day Ahead Price during Weekends: 77.98 EUR/MWh
+
+Let me explain why the weekday average price (104.37 EUR/MWh) is significantly higher than the weekend average price (77.98 EUR/MWh). This difference of about 26 EUR/MWh can be attributed to several key factors.
+
+The primary reason is industrial, commercial, institutional and educational consumption patterns. During weekdays, industrial facilities, offices, schools, universities, government buildings, and other institutions are operating at full capacity, leading to higher electricity consumption. The collective electricity consumption from these facilities, including their heating, cooling, and operational needs, contributes to higher demand during and consequently higher prices during weekdays. During weekends, most of these facilities are closed or operating at reduced capacity, resulting in reduced demand and lower prices.
+
+Another key factor involves the power system's generation mix and operational strategy. During weekdays, when demand is higher, more expensive peaking power plants need to be activated to meet the increased demand, pushing up prices. These plants often have higher marginal costs and are required to maintain system stability during peak demand periods. During weekends, with lower demand, the system can rely more on baseload and intermediate load plants, which typically have lower operational costs, resulting in lower average prices. This difference in the generation mix between weekdays and weekends directly impacts the market clearing prices.

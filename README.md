@@ -211,3 +211,5 @@ Next, the **average value per MWh** for both wind and solar is calculated as:
 Finally, the overall **average Day Ahead price** is computed as the mean of the **Day Ahead Price hourly** across all hours of the year.
 
 The logic behind these calculations is to determine the **financial value** of wind and solar power, considering both the **forecasted energy production** and the corresponding **prices** for each hour. This allows us to assess how valuable wind and solar energy are in financial terms, based on their forecasted output and market prices.
+
+Note: The calculations in this task were based on the df_hourly DataFrame created in Task 2.1. As mentioned earlier, there is a potential issue with one price data point due to the DST adjustment, which could make the price for that specific hour incorrect. However, the resulting averages are very close to the actual values, and any analysis or inferences drawn from them would remain consistent, even if the correct price for that data point were used. Therefore, no significant impact on the results has occurred.

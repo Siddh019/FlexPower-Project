@@ -267,4 +267,6 @@ The first major reason for this price difference is the direct impact of renewab
 
 The second reason relates to the seasonal timing and market conditions of these dates. November 16 falls in the heating season when electricity demand is typically higher due to increased lighting and heating needs. This higher demand, combined with low renewable production, means that even more expensive peaking power plants needed to be activated to meet demand. In contrast, March 12 occurs in spring when demand is generally moderate and weather conditions are often favorable for renewable generation, creating less pressure on the power system.
 
+### [Task 2.5](task-25)
+
 The third reason involves the broader energy market context and the backup generation mix. When renewable production is low, the power system must rely more heavily on fossil fuel-based generation, particularly gas-fired power plants. If this coincides with high gas prices (which were notably volatile in 2021) or constraints in conventional generation capacity, it can lead to extremely high electricity prices as we see on November 16. The dramatic price difference between these days (over 200 EUR/MWh) demonstrates how the power system's heavy reliance on renewables can create significant price volatility based on weather conditions and the availability of renewable resources.

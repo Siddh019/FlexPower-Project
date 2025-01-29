@@ -451,5 +451,70 @@ This approach eliminates concerns about settling at imbalance prices, as both le
 
 With these considerations in mind, I believed the best course of action would be to forecast the next day’s intraday quarter-hourly price using linear regression or non-linear regression techniques (such as machine learning) and make trading decisions based on these forecasts.
 
+I decided to run the following simple regression first
+
+Intra T+1 Qtr Price = a1 + b1 * Intra Qtr Price + b2 * Intra Hourly Price + b3 * Wind DA Forecast + b4 * PV DA Forecast + e
+
+First I decided to run a OLS regression on it. Upon running it I got an R^2 score of 0.65, which means 65% of the next day price could be linearly explained by the above mentioned variables. The R^2 score while not low wasn't extremely high either, which led me to believe maybe there exists a non linear relationship between the dependent and independent variables. Also obviously there exists a high level of multicollinearity in the data, i.e when there are two or more independent variables with high correlation levels, which further hampens the ols estimates and ols fitted prices.
+
+I decided to run a random forest regression, a support vector regression (svr), and a gradient boosting regression scheme, on the below function 
+
+Intra T + 1 Qtr Price =  f(Intra Qtr Price, Intra Hourly Price, Wind DA Forecast, PV DA Forecast, theta) + e
+
+The best result I achieved was from random forest regression hence that is the only model I've kept in the code since it takes a while to compile if i run it all. 
+
+Below are code snippets of how i set up the ols regression and random forest regression and their results and perfomance evaluation metrics: 
+``` python 
+# ### Task 2.7.2: Prediction using OLS Method
+
+# Remove rows with missing 'Intra T+1 Qtr Price' data
+d1_cleaned = d1.dropna(subset=['Intra T+1 Qtr Price (EUR/MWh)'])
+
+# Define independent variables (features) and dependent variable (target)
+X = d1_cleaned[['Intra Qtr Price (EUR/MWh)', 'Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
+y = d1_cleaned['Intra T+1 Qtr Price (EUR/MWh)']
+
+# Add a constant term to the features (for intercept in regression model)
+X = sm.add_constant(X)
+
+# Fit an Ordinary Least Squares (OLS) regression model
+model = sm.OLS(y, X).fit()
+
+# Output the regression results for analysis
+print(model.summary())
+
+# Extract the fitted values and residuals from the OLS model
+fitted_values = model.fittedvalues
+residuals = model.resid
+print(fitted_values)
+
+# ### Task 2.7.4: Prediction using Random Forest Regression Method
+
+# Import the neceassy libraries
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Re-clean the data and define features and target variable
+d1_cleaned = d1.dropna(subset=['Intra T+1 Qtr Price (EUR/MWh)'])
+X = d1_cleaned[['Intra Qtr Price (EUR/MWh)', 'Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
+y = d1_cleaned['Intra T+1 Qtr Price (EUR/MWh)']
+
+# Split the data into training and test sets (80% train, 20% test)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Initialize and fit the Random Forest model
+rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
+rf_model.fit(X_train, y_train)
+
+# Get predictions (fitted values) for the entire dataset using the Random Forest model
+fitted_values_rf = rf_model.predict(X)
+print("Fitted values (Random Forest):")
+print(fitted_values_rf)
+ ```
+
+
+
+
 
 

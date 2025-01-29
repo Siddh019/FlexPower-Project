@@ -2,9 +2,9 @@
 * [Background](#Background)
 * [Solution](#Solution)
   * [Task 1: Minimal Reporting Tool](#task-1-minimal-reporting-tool)
-     * [Task 1.1: Total Buy/Sell Volume Calculation](#task-11-total-buy-sell-volume-calculation)
-     * [Task 1.2: Strategy PnL Calculation](#task-12-strategy-pnl-calculation)
-     * [Task 1.3: API for Strategy PnL](#task-13-api-for-strategy-pnl)
+     * [Task 1.1] (#task-11)
+     * [Task 1.2] (#task-12)
+     * [Task 1.3] (#task-13)
   * [Task 2: Data Analysis and Building a Trading Strategy](#task-2-data-analysis-and-building-a-trading-strategy)
      * [Task 2.1: Wind/PV Power Forecast Analysis](#task-21-windpv-power-forecast-analysis)
      * [Task 2.2: Average Wind/Solar Production over 24 Hours](#task-22-average-windsolar-production-over-24-hours)
@@ -37,7 +37,7 @@ For this task, I used the following Python packages - pandas (for data manipulat
 ## Solution
 ### Task 1 
 [Task_1.py](Task_1.py)
-#### Task 1.1
+#### task-11
 
 The `Volume_Calculator` class is designed to calculate the total buy and sell volumes from a given trade dataset. Below is an overview of its functionality and an example usage.
 

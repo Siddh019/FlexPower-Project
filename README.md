@@ -517,9 +517,20 @@ print(fitted_values_rf)
 <img width="882" alt="Screenshot 2025-01-30 at 12 58 40 AM" src="https://github.com/user-attachments/assets/5b88cc25-5cd4-489e-a9ea-6a8de8bfe647" />
 <img width="464" alt="Screenshot 2025-01-30 at 12 59 36 AM" src="https://github.com/user-attachments/assets/a21b5c97-849d-4062-8fea-109b3e79d033" />
 
-After getting the fitted values the trading decisions were made using the below two simple rules:
-* If fitted value > DA Price, then buy at DA Price and sell at Intra T+1 Qtr Price
-* If fitted value < DA Price, buy at Intra T+1 Qtr Price and sell at DA Price
+After obtaining the fitted values, trading decisions were made based on the following two simple rules:
+
+* If the fitted value > DA Price, then **buy at DA Price** and **sell at Intra T+1 Qtr Price.**
+* If the fitted value < DA Price, then **buy at Intra T+1 Qtr Price** and **sell at DA Price.**
+
+The Profit/Loss (P/L) is calculated as the selling price - buying price.
+
+The results from both the OLS fitted values and the Random Forest regression fitted values are shown below:
+
+* **P/L from OLS method:** 480,416.93 EUR
+* **P/L from Random Forest Regression method:** 1,003,709.19 EUR
+
+Since Random Forest Regression performed better, I’ve calculated performance evaluation metrics for it, and the results are shown below:
+
 
 
 

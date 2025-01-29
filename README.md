@@ -268,9 +268,6 @@ The second reason relates to the seasonal timing and market conditions of these 
 The third reason involves the broader energy market context and the backup generation mix. When renewable production is low, the power system must rely more heavily on fossil fuel-based generation, particularly gas-fired power plants. If this coincides with high gas prices (which were notably volatile in 2021) or constraints in conventional generation capacity, it can lead to extremely high electricity prices as we see on November 16. The dramatic price difference between these days (over 200 EUR/MWh) demonstrates how the power system's heavy reliance on renewables can create significant price volatility based on weather conditions and the availability of renewable resources.
 
 ### [Task 2.5](task-25)
-
-# Day Ahead Price Comparison: Weekdays vs. Weekends
-
 This task compares the average Day Ahead Price between weekdays and weekends by performing the following steps:
 
 **Identify the Day of the Week:**

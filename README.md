@@ -141,7 +141,6 @@ Note: Due to some technical difficulties (i.e., a bug), I am currently unable to
 ### [Task 2: Data Analysis and Building a Trading Strategy](#task-2-data-analysis-and-building-a-trading-strategy)
 [Task_2.py](Task_2.py)
 ### [Task 2.1](task-21)
-# Task 2.1 - Total Power Forecast Calculator
 
 This task involves processing and aggregating power forecast data to compute the total power forecasts for wind and solar (PV) energy sources in MWh, accounting for specific intervals within each hour. The results are grouped by date and hour, and include both forecasted power values and price data. The final result is a DataFrame (`df_hourly`) that contains the total hourly forecasts for wind and PV energy sources in MWh, as well as the mean price values for both day-ahead and intraday prices. The output is grouped by date and hour.
 

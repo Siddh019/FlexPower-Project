@@ -76,7 +76,6 @@ if __name__ == "__main__":
         print(f"Error: {e}")  # Error handling for database or calculation issues
 ```
 ### [Task 1.2](#task-12)
-
 The `compute_pnl` function calculates the profit and loss (PnL) for a given trading strategy based on trade data. Below is an overview of its functionality and an example usage.
 
 * Filters Trades by Strategy
@@ -142,3 +141,4 @@ Note: Due to some technical difficulties (i.e., a bug), I am currently unable to
 ### [Task 2: Data Analysis and Building a Trading Strategy](#task-2-data-analysis-and-building-a-trading-strategy)
 [Task_2.py](Task_2.py)
 ### [Task 2.1](task-21)
+

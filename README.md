@@ -37,7 +37,7 @@ For this task, I used the following Python packages - pandas (for data manipulat
 ## Solution
 ### Task 1 
 [Task_1.py](Task_1.py)
-#### task-11
+#### [Task 1.1](#task-11)
 
 The `Volume_Calculator` class is designed to calculate the total buy and sell volumes from a given trade dataset. Below is an overview of its functionality and an example usage.
 

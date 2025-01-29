@@ -229,3 +229,19 @@ The third significant factor involves limited generation during high-price event
 
 Note: The calculations in this task were based on the df_hourly DataFrame created in Task 2.1. As mentioned earlier, there is a potential issue with one price data point due to the DST adjustment, which could make the price for that specific hour incorrect. However, the resulting averages are very close to the actual values in fact the any difference would be negligible, and any analysis or inferences drawn from them would remain consistent, even if the correct price for that data point were used. Therefore, no significant impact on the results has occurred.
 
+### [Task 2.4](task-24)
+In this task, we calculate the total renewable energy production (wind and solar combined) for each day, identify the day with the highest and lowest production, and compare the corresponding Day Ahead prices.
+
+Steps Involved:
+
+1. **Calculate Total Renewable Energy Production per Day:**  
+   The total renewable energy production for each day is calculated by summing the **Wind Day Ahead Forecast** and **PV Day Ahead Forecast** columns. This gives the total renewable energy forecast (in MW) for each day.
+
+2. **Group by Date:**  
+   The data is grouped by the `date` column, and the total renewable energy production for each day is summed. Additionally, the **Day Ahead Price** is averaged for each day.
+
+3. **Identify the Day with the Highest and Lowest Renewable Energy Production:**  
+   Using the `idxmax()` and `idxmin()` functions, the code identifies the day with the highest renewable energy production and the day with the lowest renewable energy production.
+
+4. **Extract the Day Ahead Price:**  
+   The average Day Ahead Price for the day with the highest production and the day with the lowest production is extracted for comparison.

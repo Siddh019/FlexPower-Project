@@ -37,11 +37,40 @@ For this task, I used the following Python packages - pandas (for data manipulat
 ## Solution
 ### Task 1 
 [Task_1.py](Task_1.py)
-#### Task 1.1
+#### Task 1.1 - Volume Calculator
 
-* Both functions (compute_total_buy_volume, compute_total_sell_volume) have the same arguments: `database_path(str)` and `table_path(str)`. In this task, the database_path is `trades.sqlite` and the table_name is `epex_12_20_12_13`.   
-* Combine these two functions as a `class`. Although it seems abundant to use it for only two functions, there is a possibility for adding more functions that require the same arguments later. 
-* Calculate the volume in the two functions by using SQL query. For example, in the function `compute_total_buy_function`, the query is like the one below:
+The `Volume_Calculator` class is designed to calculate the total buy and sell volumes from a given trade dataset. Below is an overview of its functionality and an example usage.
+
+* Calculates Total Buy Volume
+The `Buy_Volume` method filters the DataFrame for rows where the `'side'` column is `'buy'` and sums the `'quantity'` values to return the total buy volume.
+
+* Calculates Total Sell Volume
+The `Sell_Volume` method filters the DataFrame for rows where the `'side'` column is `'sell'` and sums the `'quantity'` values to return the total sell volume.
+
+* Example Usage with Error Handling* 
+The example usage demonstrates how to load trade data from an SQLite database, initialize the `Volume_Calculator` with the data, calculate total buy and sell volumes, and print the results. It also includes error handling to catch issues with database queries or calculations (e.g., missing columns or data-related errors).
+
 ```python
-cursor.execute(f"SELECT SUM(QUANTITY) FROM {self.table_name} WHERE SIDE ='buy' ")
+# Example Usage
+if __name__ == "__main__":
+    try:
+        # Load the trades data from the SQLite database into a Pandas DataFrame
+        # The SQLite query pulls data from the 'epex_12_20_12_13' table
+        trades_df = pd.read_sql("SELECT * FROM epex_12_20_12_13", 
+                                "sqlite:///trades.sqlite")  # SQLite database path
+
+        # Initialize the Volume_Calculator with the loaded DataFrame
+        total_volume = Volume_Calculator(trades_df)
+
+        # Calculate total buy and sell volumes
+        total_buy_volume = total_volume.Buy_Volume()
+        total_sell_volume = total_volume.Sell_Volume()
+
+        # Output the results for verification
+        print(f"Total buy volume: {total_buy_volume}")
+        print(f"Total sell volume: {total_sell_volume}")
+    
+    except Exception as e:
+        print(f"Error: {e}")  # Error handling for database or calculation issues
+
 ```

@@ -35,3 +35,12 @@ For this task, I used the following Python packages - pandas (for data manipulat
 For this task, I used the following Python packages - pandas (for data manipulation and analysis), numpy (for numerical operations), matplotlib (for visualizations), sklearn (for machine learning models and metrics), datetime (for working with date and time), and statsmodels (for statistical modeling). Hence, installing these packages is necessary for running the code.
  
 ## Solution
+### Task 1 
+#### Task 1.1
+[task1_volcalculator.py](task1_volcalculator.py)
+* Both functions (compute_total_buy_volume, compute_total_sell_volume) have the same arguments: `database_path(str)` and `table_path(str)`. In this task, the database_path is `trades.sqlite` and the table_name is `epex_12_20_12_13`.   
+* Combine these two functions as a `class`. Although it seems abundant to use it for only two functions, there is a possibility for adding more functions that require the same arguments later. 
+* Calculate the volume in the two functions by using SQL query. For example, in the function `compute_total_buy_function`, the query is like the one below:
+```python
+cursor.execute(f"SELECT SUM(QUANTITY) FROM {self.table_name} WHERE SIDE ='buy' ")
+```

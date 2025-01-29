@@ -406,3 +406,20 @@ daily_prices_output = daily_prices_output.rename(columns={
 Upon running the code, the total revenue generated with a battery capacity of 1 MWh, which can be fully charged and discharged (1 cycle) every day in 2021, is:
 
 **Total Revenue for the Year (EUR): €27,789.66**
+
+This was an extremely fun concept to explore, but I don't believe the function is fully deployable just yet. The current model doesn't account for important factors such as transaction costs (e.g., brokerage fees for buying and selling power), and, perhaps more significantly, it doesn't consider charging or discharging time.
+
+For instance, it might take around 45 minutes to fully charge or discharge the battery. There's a potential issue, albeit unlikely, where you might end up charging and discharging the battery in consecutive hours. For example, if you charge at hour 2 and discharge at hour 3, and assuming it takes 45 minutes to charge/discharge:
+
+* You start charging at 2:00 and finish at 2:45.
+* Even if you immediately start discharging at 2:45, the earliest you can start delivering power is 3:30.
+
+Thus, you wouldn't be able to sell power at 3:00 as planned, which could affect the revenue outcome.
+
+While I didn’t include this restriction in the model, it would be fascinating to see how this time constraint would impact the overall revenue. The reason I didn’t implement it was because I wasn’t sure how long it takes to charge and discharge a 1 MWh battery (for all I knew, it could be 15 minutes per cycle, which would make the whole issue insignificant). Additionally, I only realized this issue while writing up this report.
+
+Nonetheless, incorporating this factor would be an interesting extension of the model, and I thought it was worth mentioning here as a potential future project.
+
+
+
+

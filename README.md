@@ -245,3 +245,15 @@ Steps Involved:
 
 4. **Extract the Day Ahead Price:**  
    The average Day Ahead Price for the day with the highest production and the day with the lowest production is extracted for comparison.
+
+Below are the results obtained after running the code:
+
+Day with Highest Renewable Energy Production: 2021-03-12
+Total Renewable Production on this day: 4352164.00 MW
+Average Day Ahead Price on this day: 22.29 EUR/MWh
+
+Day with Lowest Renewable Energy Production: 2021-11-16
+Total Renewable Production on this day: 236797.00 MW
+Average Day Ahead Price on this day: 237.47 EUR/MWh
+
+The Average Hourly DA Price on the day with the highest renewable energy production is lower than the day with the lowest production.

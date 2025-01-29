@@ -281,5 +281,5 @@ The data is grouped by `is_weekend` (Weekday or Weekend) and the average Day Ahe
 
 Below are the results obtained after running the code:
 
--Average Hourly Day Ahead Price during Weekdays: 104.37 EUR/MWh
--Average Hourly Day Ahead Price during Weekends: 77.98 EUR/MWh
+* Average Hourly Day Ahead Price during Weekdays: 104.37 EUR/MWh
+* Average Hourly Day Ahead Price during Weekends: 77.98 EUR/MWh

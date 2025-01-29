@@ -37,7 +37,7 @@ For this task, I used the following Python packages - pandas (for data manipulat
 ## Solution
 ### Task 1 
 [Task_1.py](Task_1.py)
-#### [Task 1.1](#task-11)
+### [Task 1.1](#task-11)
 The `Volume_Calculator` class is designed to calculate the total buy and sell volumes from a given trade dataset. Below is an overview of its functionality and an example usage.
 
 * Calculates Total Buy Volume
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error: {e}")  # Error handling for database or calculation issues
 ```
-[Task 1.2](#task-12)
+### [Task 1.2](#task-12)
 
 The `compute_pnl` function calculates the profit and loss (PnL) for a given trading strategy based on trade data. Below is an overview of its functionality and an example usage.
 

@@ -74,5 +74,39 @@ if __name__ == "__main__":
     
     except Exception as e:
         print(f"Error: {e}")  # Error handling for database or calculation issues
+```
+[Task 1.2](#task-12)
+The `compute_pnl` function calculates the profit and loss (PnL) for a given trading strategy based on trade data. Below is an overview of its functionality and an example usage.
 
+* Filters Trades by Strategy
+
+The function filters the DataFrame to include only trades that belong to the specified `strategy_id`. This ensures that the PnL calculation is specific to a particular strategy.
+
+* Calculates PnL for Each Trade
+
+The function uses a vectorized approach to calculate PnL for each trade. For 'sell' orders, the PnL is positive (profit), and for 'buy' orders, the PnL is negative (loss), based on the quantity and price of each trade.
+
+* Example Usage with Error Handling
+
+The example usage demonstrates how to load trade data from an SQLite database, compute the PnL for different strategies, and print the results. The function also handles errors related to reading the database or calculations.
+
+```python
+# Example Usage
+if __name__ == "__main__":
+    try:
+        # Load the trades data from the SQLite database into a Pandas DataFrame
+        trades_df = pd.read_sql("SELECT * FROM epex_12_20_12_13",
+                                "sqlite:///trades.sqlite")  # SQLite database path
+        
+        # Compute the PnL for different strategies
+        strategy_id = 'strategy_1'
+        pnl_value = compute_pnl(strategy_id, trades_df)
+        print(f"The PnL of {strategy_id} is: {pnl_value}")
+
+        strategy_id = 'strategy_2'
+        pnl_value = compute_pnl(strategy_id, trades_df)
+        print(f"The PnL of {strategy_id} is: {pnl_value}")
+    
+    except Exception as e:
+        print(f"Error reading data from SQLite: {e}")
 ```

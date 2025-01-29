@@ -212,11 +212,20 @@ Finally, the overall **average Day Ahead price** is computed as the mean of the 
 
 The logic behind these calculations is to determine the **financial value** of wind and solar power, considering both the **forecasted energy production** and the corresponding **prices** for each hour. This allows us to assess how valuable wind and solar energy are in financial terms, based on their forecasted output and market prices.
 
-Note: The calculations in this task were based on the df_hourly DataFrame created in Task 2.1. As mentioned earlier, there is a potential issue with one price data point due to the DST adjustment, which could make the price for that specific hour incorrect. However, the resulting averages are very close to the actual values, and any analysis or inferences drawn from them would remain consistent, even if the correct price for that data point were used. Therefore, no significant impact on the results has occurred.
-
 Below are the results obtained after running the code:
 - **Average Day Ahead Price:** 96.85 EUR/MWh  
 - **Average Wind Value per MWh:** 81.39 EUR/MWh  
 - **Average PV Value per MWh:** 76.89 EUR/MWh
 - The **average value for Wind** is **lower** than the average Day Ahead price.
 - The **average value for PV** is **lower** than the average Day Ahead price.
+
+Let me explain why both Wind and PV have lower average values compared to the average Day Ahead price. The data shows that while the average Day Ahead price was 96.85 EUR/MWh, wind and solar achieved lower values of 81.39 EUR/MWh and 76.89 EUR/MWh respectively. This difference can be attributed to several interconnected factors.
+
+The first major factor is the mismatch between generation patterns and price patterns. Wind and solar facilities generate electricity based on weather conditions rather than market demand. Solar generation peaks during midday when supply is abundant, while wind often generates more during nighttime and shoulder hours when demand and prices are typically lower. This means that renewable generators are frequently selling more electricity during lower-price periods, reducing their average realized value.
+
+The second key factor relates to how weather-driven supply impacts market prices. When weather conditions are favorable for wind or solar generation, it typically means many renewable generators are producing simultaneously. This increased supply tends to push down market prices during these periods. As a result, wind and solar generators are selling more electricity exactly when their own production is contributing to lower market prices, creating a negative correlation between renewable generation and market prices.
+
+The third significant factor involves limited generation during high-price events. Price spikes often occur during periods of system stress, such as extreme weather events, low renewable generation, or high demand periods. Solar facilities cannot generate during evening peak demand hours, and wind generation may be low during extreme weather events or high-pressure systems. This means renewable generators often miss out on the highest-priced hours, which further reduces their average realized price compared to the market average. Since these high-price events factor into the overall market average but may not benefit renewable generators, it contributes to their lower average values.
+
+Note: The calculations in this task were based on the df_hourly DataFrame created in Task 2.1. As mentioned earlier, there is a potential issue with one price data point due to the DST adjustment, which could make the price for that specific hour incorrect. However, the resulting averages are very close to the actual values in fact the any difference would be negligible, and any analysis or inferences drawn from them would remain consistent, even if the correct price for that data point were used. Therefore, no significant impact on the results has occurred.
+

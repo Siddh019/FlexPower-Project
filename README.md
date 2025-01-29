@@ -31,5 +31,7 @@ For this task, I used the following Python packages - pandas (for data manipulat
   * Task 2.5: Calculate weekend vs weekday average prices
   * Task 2.6: Optimise the revenue from battery charging and discharging
   * Task 2.7: Create a trading strategy and display it's perfomance
+
+For this task, I used the following Python packages - pandas (for data manipulation and analysis), numpy (for numerical operations), matplotlib (for visualizations), sklearn (for machine learning models and metrics), datetime (for working with date and time), and statsmodels (for statistical modeling). Hence, installing these packages is necessary for running the code.
  
 ## Solution

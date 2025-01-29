@@ -317,7 +317,7 @@ We repeat the process for subsequent highest Day-Ahead Prices (i.e the second hi
 **Select the Optimal Pair**:
 We calculate 12 potential buy-sell pairs for each day (since there are 24 hours in a day), and then choose the pair with the highest revenue.
 
-Caveat: Handling Negative Prices:
+**Caveat: Handling Negative Prices:**
 When the Day-Ahead Price is negative, the transaction behaves oppositely:
 * You are paid to purchase power (i.e., a negative price means you receive money to buy power).
 * You must pay to sell power (i.e., a negative price means you pay out of your pocket to sell power).

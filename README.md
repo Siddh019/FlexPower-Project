@@ -150,9 +150,8 @@ The code processes the input data to convert power forecasts from megawatts (MW)
 * Conversion Logic: MWh = MW * h
 
 The formula `MWh = MW * h` is used to convert power (measured in megawatts, MW) into energy (measured in megawatt-hours, MWh). This conversion is based on the relationship between power and energy, where:
-
- 1) MW (megawatts) represents the rate of power production or consumption.
- 2) MWh (megawatt-hours) represents the total amount of energy produced or consumed over a 1 hour.
+1) MW (megawatts) represents the rate of power production or consumption.
+2) MWh (megawatt-hours) represents the total amount of energy produced or consumed over a 1 hour.
 
 
 ## 2. **Convert Time Column into Date and Hour**

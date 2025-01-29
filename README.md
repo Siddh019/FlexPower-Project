@@ -17,15 +17,19 @@
 ## Background
 This repo consists of solutions for the tasks in [**FlexPower QuantChallenge**](https://github.com/FlexPwr/QuantChallenge). Below are descriptions of each task. 
 * Task 1
-  * Task 1.1: Write two functions for compute buy and sell total volume each.
-  * Task 1.2: Write a function computing Profit and Loss for each strategy (PnL)
-  * Task 1.3: Expose the function written in task 2 as an entrypoint of a web application
+  * Task 1.1: Write functions that compute total buy volume and total sell volume.
+  * Task 1.2: Write functions that compute the Profit and Loss for each strategy (PnL)
+  * Task 1.3: Expose the function written in task 1.2 as an entrypoint of a web application
 
 For this task, I used the following Python packages such as pandas (for data manipulation and analysis), sqlite3 (for interacting with the SQLite database), and Flask (for creating the API). Hence, installing these packages is a necessary for running the code.
 
 * Task 2
-  * Task 2.1: Write two functions for compute buy and sell total volume each.
-  * Task 2.2: Write a function computing Profit and Loss for each strategy (PnL)
-  * Task 2.3: Expose the function written in task 2 as an entrypoint of a web application
-
+  * Task 2.1: Aggregate energy forecasts and prices by date and hour, converting MW values to MWh.
+  * Task 2.2: Calculate the average hourly wind/solar production across all days
+  * Task 2.3: Calculate the average value of wind/solar Power
+  * Task 2.4: Find the day with the highest and the day with the lowest renewable energy production
+  * Task 2.5: Calculate weekend vs weekday average prices
+  * Task 2.6: Optimise the revenue from battery charging and discharging
+  * Task 2.7: Create a trading strategy and display it's perfomance
+ 
 ## Solution

@@ -114,7 +114,7 @@ if __name__ == "__main__":
 ### [Task 1.3](#task-13)
 [Task_1.3.py](Task_1.3.py)
 
-This project exposes a the function defined in Task 1.2 API using Flask. The PnL is calculated based on trade data from a SQLite database and can be accessed via a simple API endpoint. The API response specification were provided in 
+This project exposes a the function defined in Task 1.2 API using Flask. The PnL is calculated based on trade data from a SQLite database and can be accessed via a simple API endpoint. 
 
 * Calculate PnL for a Specific Strategy
 
@@ -122,11 +122,11 @@ The API endpoint `/pnl/<strategy_id>` calculates and returns the PnL for a given
 
 * JSON Response with PnL Data
 
-The API responds with a JSON object containing the strategy ID, the calculated PnL value, the currency unit (euro), and the timestamp of the PnL calculation in ISO 8601 format.
+The API responds with a JSON object containing the strategy ID, the calculated PnL value, the currency unit (euro), and the timestamp of the PnL calculation in ISO 8601 format. 
 
-* Error Handling and Database Connectivity
+* Response Data Specification
 
-The API includes error handling for both database-related issues (e.g., SQLite errors) and unexpected errors. If an error occurs, the API responds with an appropriate error message and status code.
+We define the specification of the response data using a fuction, which specifies the structure and type of the response fields. The specification is used to define the expected response from the API. 
 
 * Example Usage
 

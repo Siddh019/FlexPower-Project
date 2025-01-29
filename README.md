@@ -420,6 +420,9 @@ While I didn’t include this restriction in the model, it would be fascinating 
 
 Nonetheless, incorporating this factor would be an interesting extension of the model, and I thought it was worth mentioning here as a potential future project.
 
+### [Task 2.7](task-27)
+[Task_2.7.py](Task_2.7.py)
+
 
 
 

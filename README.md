@@ -35,7 +35,7 @@ For this task, I used the following Python packages - pandas (for data manipulat
 For this task, I used the following Python packages - pandas (for data manipulation and analysis), numpy (for numerical operations), matplotlib (for visualizations), sklearn (for machine learning models and metrics), datetime (for working with date and time), and statsmodels (for statistical modeling). Hence, installing these packages is necessary for running the code.
  
 ## Solution
-### Task 1 
+###  [Task 1: Minimal Reporting Tool](#task-1-minimal-reporting-tool)
 [Task_1.py](Task_1.py)
 ### [Task 1.1](#task-11)
 The `Volume_Calculator` class is designed to calculate the total buy and sell volumes from a given trade dataset. Below is an overview of its functionality and an example usage.

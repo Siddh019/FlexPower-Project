@@ -182,3 +182,6 @@ df_hourly = df.groupby(['date', 'hour']).agg({
 
 Note - The mean price is used for the hour because the price remains constant throughout that hour. However, during the DST transition, when an hour is repeated, there are two different prices for the same hour. This creates an issue, as taking the mean of the two prices might not be entirely accurate for that specific hour. Unfortunately, there was no easy way to split or remove the  data, as the task requires providing the forecast data for the whole year. Thus, instead of removing or splitting the data, the decision was made to leave the price data as-is. As a result, while the price for most hours is accurate, **one hour during the DST transition may have an incorrect price value due to averaging two different prices**.
 
+After applying the conversion and aggregation logic, the resulting DataFrame should look like this:
+<img width="1062" alt="Screenshot 2025-01-29 at 7 44 25 PM" src="https://github.com/user-attachments/assets/b331428a-e9ac-43c1-aadc-5633cc9af540" />
+One would expect there to be 365*24 = 8760 rows. However due to DST one hour is repeated hence there is one row less

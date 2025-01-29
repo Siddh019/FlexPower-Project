@@ -403,3 +403,6 @@ daily_prices_output = daily_prices_output.rename(columns={
     'revenue': 'revenue'
 })
  ```
+Upon running the code, the total revenue generated with a battery capacity of 1 MWh, which can be fully charged and discharged (1 cycle) every day in 2021, is:
+
+**Total Revenue for the Year (EUR): €27,789.66**

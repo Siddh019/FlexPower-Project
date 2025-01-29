@@ -144,9 +144,9 @@ print(f"Total Renewable Production on this day: {min_renewable_day['Total Renewa
 print(f"Average Day Ahead Price on this day: {min_renewable_day_price:.2f} EUR/MWh\n")
 
 if max_renewable_day_price > min_renewable_day_price:
-    print("The Average Hourly DA on the day with the highest renewable energy production is higher than the day with the lowest production.")
+    print("The Average Hourly DA price on the day with the highest renewable energy production is higher than the day with the lowest production.")
 else:
-    print("The Average Hourly DA on the day with the highest renewable energy production is lower than the day with the lowest production.")
+    print("The Average Hourly DA price on the day with the highest renewable energy production is lower than the day with the lowest production.")
 
 print()  
 

@@ -5,7 +5,7 @@
      * [Task 1.1: Total Buy/Sell Volume Calculation](#task-11-total-buy-sell-volume-calculation)
      * [Task 1.2: Strategy PnL Calculation](#task-12-strategy-pnl-calculation)
      * [Task 1.3: API for Strategy PnL](#task-13-api-for-strategy-pnl)
-* [Task 2: Data Analysis and Building a Trading Strategy](#task-2-data-analysis-and-building-a-trading-strategy)
+  * [Task 2: Data Analysis and Building a Trading Strategy](#task-2-data-analysis-and-building-a-trading-strategy)
      * [Task 2.1: Wind/PV Power Forecast Analysis](#task-21-windpv-power-forecast-analysis)
      * [Task 2.2: Average Wind/Solar Production over 24 Hours](#task-22-average-windsolar-production-over-24-hours)
      * [Task 2.3: Average Value of Wind/Solar Power](#task-23-average-value-of-windsolar-power)

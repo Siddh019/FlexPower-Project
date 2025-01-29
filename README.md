@@ -451,19 +451,21 @@ This approach eliminates concerns about settling at imbalance prices, as both le
 
 With these considerations in mind, I believed the best course of action would be to forecast the next day’s intraday quarter-hourly price using linear regression or non-linear regression techniques (such as machine learning) and make trading decisions based on these forecasts.
 
-I decided to run the following simple regression first
+I decided to start by running a simple regression model:
 
-Intra T+1 Qtr Price = a1 + b1 * Intra Qtr Price + b2 * Intra Hourly Price + b3 * Wind DA Forecast + b4 * PV DA Forecast + e
+**Intra T+1 Qtr Price = a₁ + b₁ * Intra Qtr Price + b₂ * Intra Hourly Price + b₃ * Wind DA Forecast + b₄ * PV DA Forecast + ε**
 
-First I decided to run a OLS regression on it. Upon running it I got an R^2 score of 0.65, which means 65% of the next day price could be linearly explained by the above mentioned variables. The R^2 score while not low wasn't extremely high either, which led me to believe maybe there exists a non linear relationship between the dependent and independent variables. Also obviously there exists a high level of multicollinearity in the data, i.e when there are two or more independent variables with high correlation levels, which further hampens the ols estimates and ols fitted prices.
+Initially, I applied an OLS (Ordinary Least Squares) regression. The result was an R² score of 0.65, which indicates that 65% of the next day's price could be linearly explained by the variables mentioned above. While this R² score isn’t particularly low, it isn’t extremely high either, which made me suspect that there could be a non-linear relationship between the dependent and independent variables.
 
-I decided to run a random forest regression, a support vector regression (svr), and a gradient boosting regression scheme, on the below function 
+Additionally, it’s evident that there is a high level of multicollinearity in the data. Multicollinearity occurs when two or more independent variables are highly correlated with each other, which can undermine the reliability of the OLS estimates and distort the fitted prices.
 
-Intra T + 1 Qtr Price =  f(Intra Qtr Price, Intra Hourly Price, Wind DA Forecast, PV DA Forecast, theta) + e
+Given this, I decided to try other models to capture potential non-linearity. I tested a Random Forest Regression, Support Vector Regression (SVR), and Gradient Boosting Regression on the following function:
 
-The best result I achieved was from random forest regression hence that is the only model I've kept in the code since it takes a while to compile if i run it all. 
+**Intra T+1 Qtr Price = f(Intra Qtr Price, Intra Hourly Price, Wind DA Forecast, PV DA Forecast, θ) + ε**
 
-Below are code snippets of how i set up the ols regression and random forest regression and their results and perfomance evaluation metrics: 
+The best result came from the Random Forest Regression, which I decided to keep in the code, as it provided the best performance. Since running all the models at once can be computationally expensive, I opted to focus on the Random Forest model for efficiency.
+
+Below are code snippets showing how I set up both the OLS regression and the Random Forest Regression, along with their results and performance evaluation metrics:
 ``` python 
 # ### Task 2.7.2: Prediction using OLS Method
 

@@ -130,4 +130,11 @@ We define the specification of the response data using a fuction, which specifie
 
 * Example Usage
 
+Open your terminal and run the file [Task_1.3.py](Task_1.3.py). You should get an expected output as below: 
+
+<img width="603" alt="Screenshot 2025-01-29 at 7 06 33 PM" src="https://github.com/user-attachments/assets/a8cfda40-e59e-4239-a74e-ce146c159a77" />
+
+Copy, Paste the website on your browser and you should hopefully get the desired result. 
+Note: Due to some technical difficulties (i.e., a bug), I am currently unable to run the Flask app on my laptop. The output shown in the picture was generated on a friend's laptop. However, he didn't copy and paste the link into his browser, so I’m unable to confirm the exact output. Nevertheless, I am confident that the code produces the expected result, despite not being able to verify it directly due to these unfortunate circumstances.
+
 

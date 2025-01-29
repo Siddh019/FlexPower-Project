@@ -422,6 +422,7 @@ Nonetheless, incorporating this factor would be an interesting extension of the 
 
 ### [Task 2.7](task-27)
 [Task_2.7.py](Task_2.7.py)
+
 The brief for this task was to develop a trading indicator based on specific input parameters, which would then determine position-taking (long or short) and calculate resulting trade profits. The core objective was to create a profitable trading strategy leveraging the price differences between day-ahead hourly prices and intraday hourly prices.
 
 This proved to be the most engaging task, prompting deep analysis of several crucial market mechanics. A few fundamental questions emerged regarding trade timing:

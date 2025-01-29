@@ -453,7 +453,7 @@ With these considerations in mind, I believed the best course of action would be
 
 I decided to start by running a simple regression model:
 
-**Intra T+1 Qtr Price = a₁ + b₁ * Intra Qtr Price + b₂ * Intra Hourly Price + b₃ * Wind DA Forecast + b₄ * PV DA Forecast + ε**
+**Intra T+1 Qtr Price = a₁ + b₁ * Intra Qtr Price +  b₂ * Intra Hourly Price + b₃ * DA Hourly Price + b₄ * Wind DA Forecast + b₅ * PV DA Forecast + ε**
 
 Initially, I applied an OLS (Ordinary Least Squares) regression. The result was an R² score of 0.65, which indicates that 65% of the next day's price could be linearly explained by the variables mentioned above. While this R² score isn’t particularly low, it isn’t extremely high either, which made me suspect that there could be a non-linear relationship between the dependent and independent variables.
 
@@ -461,7 +461,7 @@ Additionally, it’s evident that there is a high level of multicollinearity in 
 
 Given this, I decided to try other models to capture potential non-linearity. I tested a Random Forest Regression, Support Vector Regression (SVR), and Gradient Boosting Regression on the following function:
 
-**Intra T+1 Qtr Price = f(Intra Qtr Price, Intra Hourly Price, Wind DA Forecast, PV DA Forecast, θ) + ε**
+**Intra T+1 Qtr Price = f(Intra Qtr Price, Intra Hourly Price, DA Hourly Price, Wind DA Forecast, PV DA Forecast, θ) + ε**
 
 The best result came from the Random Forest Regression, which I decided to keep in the code, as it provided the best performance. Since running all the models at once can be computationally expensive, I opted to focus on the Random Forest model for efficiency.
 
@@ -516,6 +516,10 @@ print(fitted_values_rf)
  ```
 <img width="882" alt="Screenshot 2025-01-30 at 12 58 40 AM" src="https://github.com/user-attachments/assets/5b88cc25-5cd4-489e-a9ea-6a8de8bfe647" />
 <img width="464" alt="Screenshot 2025-01-30 at 12 59 36 AM" src="https://github.com/user-attachments/assets/a21b5c97-849d-4062-8fea-109b3e79d033" />
+
+After getting the fitted values the trading decisions were made using the below two simple rules:
+* If fitted value > DA Price, then buy at DA Price and sell at Intra T+1 Qtr Price
+* If fitted value < DA Price, buy at Intra Price and sell at DA Price
 
 
 

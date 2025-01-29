@@ -153,17 +153,32 @@ The formula `MWh = MW * h` is used to convert power (measured in megawatts, MW) 
 1) MW (megawatts) represents the rate of power production or consumption.
 2) MWh (megawatt-hours) represents the total amount of energy produced or consumed over a 1 hour.
 
+* Handling for Daylight Savings Time
 
-## 2. **Convert Time Column into Date and Hour**
+Ideally, to calculate the total energy in MWh, you could simply group the data by `date` and `hour`, then calculate the sum of power forecasts for each group and multiply it by the fraction of the hour (e.g., 1/4 hour for 15-minute intervals). However, Daylight Saving Time (DST) introduces a complication.
 
-The first step involves converting the 'time' column into a `datetime` format, then extracting the `date` and `hour` components.
+DST and Hour Duplication: In the winter, when the clocks go back by 1 hour, a specific hour is repeated (e.g., 2:00 AM happens twice, once during daylight saving time and again after the clock is turned back). This means that the power forecast for that specific hour should be multiplied by 1/8 (i.e., half of the usual 1/4 hour interval) to account for the repeated time block. To ensure the correct conversion below was done :
 
 ```python
-# Convert the 'hour' column into a datetime format (if not already in datetime format)
-df['time'] = pd.to_datetime(df['time'], format='%d/%m/%y %H:%M')
+# Custom aggregation function that handles DST changes
+def mw_to_mwh(x):
+    # Count actual intervals in a specific hour
+    num_intervals = len(x)
+    # Calculate hours per interval for the specific hour
+    hours_per_interval = 1 / num_intervals
+    # Calculate MWh
+    return x.sum() * hours_per_interval
 
-# Extract the 'hour' and 'date' from the 'time' column
-df['date'] = df['time'].dt.date  # Extract just the date part (YYYY-MM-DD)
-df['hour'] = df['time'].dt.hour  # Extract the hour part (0-23)
+# Group by 'date' and 'hour' with the custom aggregation
+df_hourly = df.groupby(['date', 'hour']).agg({
+    'Wind Day Ahead Forecast [in MW]': mw_to_mwh,
+    'Wind Intraday Forecast [in MW]': mw_to_mwh,
+    'PV Day Ahead Forecast [in MW]': mw_to_mwh,
+    'PV Intraday Forecast [in MW]': mw_to_mwh,
+    'Day Ahead Price hourly [in EUR/MWh]': 'mean',
+    'Intraday Price Hourly  [in EUR/MWh]': 'mean',
+}).reset_index()
+```
 
+Note - The mean price is used for the hour because the price remains constant throughout that hour. However, during the DST transition, when an hour is repeated, there are two different prices for the same hour. This creates an issue, as taking the mean of the two prices might not be entirely accurate for that specific hour. Unfortunately, there was no easy way to split or remove the  data, as the task requires providing the forecast data for the whole year. Thus, instead of removing or splitting the data, the decision was made to leave the price data as-is. As a result, while the price for most hours is accurate, **one hour during the DST transition may have an incorrect price value due to averaging two different prices**.
 

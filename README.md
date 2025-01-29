@@ -215,7 +215,6 @@ The logic behind these calculations is to determine the **financial value** of w
 Note: The calculations in this task were based on the df_hourly DataFrame created in Task 2.1. As mentioned earlier, there is a potential issue with one price data point due to the DST adjustment, which could make the price for that specific hour incorrect. However, the resulting averages are very close to the actual values, and any analysis or inferences drawn from them would remain consistent, even if the correct price for that data point were used. Therefore, no significant impact on the results has occurred.
 
 Below are the results obtained after running the code:
-
 - **Average Day Ahead Price:** 96.85 EUR/MWh  
 - **Average Wind Value per MWh:** 81.39 EUR/MWh  
 - **Average PV Value per MWh:** 76.89 EUR/MWh

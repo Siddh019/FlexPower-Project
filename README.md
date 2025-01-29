@@ -23,4 +23,9 @@ This repo consists of solutions for the tasks in [**FlexPower QuantChallenge**](
 
 For this task, I used the following Python packages such as pandas (for data manipulation and analysis), sqlite3 (for interacting with the SQLite database), and Flask (for creating the API). Hence, installing these packages is a necessary for running the code.
 
+* Task 2
+  * Task 2.1: Write two functions for compute buy and sell total volume each.
+  * Task 2.2: Write a function computing Profit and Loss for each strategy (PnL)
+  * Task 2.3: Expose the function written in task 2 as an entrypoint of a web application
+
 ## Solution

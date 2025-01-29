@@ -324,4 +324,82 @@ When the Day-Ahead Price is negative, the transaction behaves oppositely:
 
 For our revenue-maximizing strategy, we only consider discharge hours where the price is non-negative (i.e., greater than 0 EUR/MWh). This ensures we avoid paying to sell power, which would reduce the revenue.
 
-Hence, the process to maximizing revenue for each day is to calculate 12 pairs of buy prices, sell prices, charge hours, and discharge hours. We then select the pair that yields the highest revenue.
+Hence, the process to maximizing revenue for each day is to calculate 12 pairs of buy prices, sell prices, charge hours, and discharge hours. We then select the pair that yields the highest revenue. This process naturally involves running iterative loops as shown below 
+``` python 
+# Iterate over each day to calculate the revenue-maximizing pair
+for i, row in daily_prices.iterrows():
+    date = row['date']
+    
+    # Filter data for the current date
+    day_data = df_hourly[df_hourly['date'] == date]
+    
+    # Filter out any negative prices for max_price (as you cannot discharge at negative prices)
+    day_data_positive_prices = day_data[day_data['Day Ahead Price hourly [in EUR/MWh]'] > 0]
+    
+    # If no positive prices are found for the day, skip the iteration
+    if day_data_positive_prices.empty:
+        continue
+    
+    # Find the top 12 maximum positive prices and their corresponding hours
+    sorted_day_data = day_data_positive_prices.sort_values(by='Day Ahead Price hourly [in EUR/MWh]', ascending=False)
+    
+    # Limit to the top 12 prices, or fewer if there are not enough available hours
+    top_12_prices = sorted_day_data.head(12)
+    
+    # Variables to store the best revenue pair for the day
+    best_revenue = -float('inf')  # Start with a very low revenue
+    best_max_price = None
+    best_max_hour = None
+    best_min_price = None
+    best_min_hour = None
+    
+    # For each of the top 12 max prices, find the min price in the hours before the max hour
+    for _, top_row in top_12_prices.iterrows():
+        max_price = top_row['Day Ahead Price hourly [in EUR/MWh]']
+        max_hour = top_row['hour']
+        
+        # Get the data for the hours before the max hour to calculate the min price
+        previous_hours = day_data[day_data['hour'] < max_hour]
+        
+        # If there are valid previous hours, calculate the min price
+        if not previous_hours.empty:
+            # Do not filter out negative prices. Allow negative values to be considered.
+            min_price = previous_hours['Day Ahead Price hourly [in EUR/MWh]'].min()
+            
+            # Find the hour corresponding to the minimum price
+            min_hour = previous_hours[previous_hours['Day Ahead Price hourly [in EUR/MWh]'] == min_price]['hour'].values[0]
+            
+            # Calculate the revenue for this max-min pair
+            revenue = max_price - min_price
+            
+            # If this revenue is the highest, update the best pair
+            if revenue > best_revenue:
+                best_revenue = revenue
+                best_max_price = max_price
+                best_max_hour = max_hour
+                best_min_price = min_price
+                best_min_hour = min_hour
+    
+    # Update the daily_prices DataFrame with the best pair for this day
+    daily_prices.at[i, 'max_price'] = best_max_price
+    daily_prices.at[i, 'max_hour'] = best_max_hour
+    daily_prices.at[i, 'min_price'] = best_min_price
+    daily_prices.at[i, 'min_hour'] = best_min_hour
+    daily_prices.at[i, 'revenue'] = best_revenue
+
+# Output the final DataFrame with only the required columns
+
+# Set the new column names as per your requirement
+output_columns = ['date', 'min_price', 'min_hour', 'max_price', 'max_hour', 'revenue']
+daily_prices_output = daily_prices[output_columns]
+
+# Rename the columns to the new names
+daily_prices_output = daily_prices_output.rename(columns={
+    'date': 'date',
+    'max_price': 'sell price',
+    'max_hour': 'discharge hour',
+    'min_price': 'buy price',
+    'min_hour': 'charge hour',
+    'revenue': 'revenue'
+})
+ ```

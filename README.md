@@ -269,3 +269,15 @@ The third reason involves the broader energy market context and the backup gener
 
 ### [Task 2.5](task-25)
 
+# Day Ahead Price Comparison: Weekdays vs. Weekends
+
+This task compares the average Day Ahead Price between weekdays and weekends by performing the following steps:
+
+**Identify the Day of the Week:**
+A new column, `day_of_week`, is created in the dataset, which stores the name of the day (e.g., "Monday", "Tuesday") for each date. This is achieved using the `strftime('%A')` method.
+
+**Classify the Day as Weekday or Weekend:**
+A new column, `is_weekend`, is added to the dataset to classify each day as either "Weekday" (Monday to Friday) or "Weekend" (Saturday and Sunday). This classification is performed using a lambda function that checks if the day of the week is Saturday or Sunday.
+
+**Calculate the Average Hourly Day Ahead Price**
+- The data is grouped by `is_weekend` (Weekday or Weekend) and the average Day Ahead Price (in EUR/MWh) is calculated for each group. The result shows the mean hourly Day Ahead Price for weekdays and weekends.

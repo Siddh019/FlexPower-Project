@@ -21,7 +21,7 @@ This repo consists of solutions for the tasks in [**FlexPower QuantChallenge**](
   * Task 1.2: Write functions that compute the Profit and Loss for each strategy (PnL)
   * Task 1.3: Expose the function written in task 1.2 as an entrypoint of a web application
 
-For this task, I used the following Python packages such as pandas (for data manipulation and analysis), sqlite3 (for interacting with the SQLite database), and Flask (for creating the API). Hence, installing these packages is a necessary for running the code.
+For this task, I used the following Python packages - pandas (for data manipulation and analysis), sqlite3 (for interacting with the SQLite database), and Flask (for creating the API). Hence, installing these packages is a necessary for running the code.
 
 * Task 2
   * Task 2.1: Aggregate energy forecasts and prices by date and hour, converting MW values to MWh.

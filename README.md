@@ -6,13 +6,13 @@
      * [Task 1.2](#task-12)
      * [Task 1.3](#task-13)
   * [Task 2: Data Analysis and Building a Trading Strategy](#task-2-data-analysis-and-building-a-trading-strategy)
-     * [Task 2.1: Wind/PV Power Forecast Analysis](#task-21-windpv-power-forecast-analysis)
-     * [Task 2.2: Average Wind/Solar Production over 24 Hours](#task-22-average-windsolar-production-over-24-hours)
-     * [Task 2.3: Average Value of Wind/Solar Power](#task-23-average-value-of-windsolar-power)
-     * [Task 2.4: Days with Highest and Lowest Renewable Energy Production](#task-24-days-with-highest-and-lowest-renewable-energy-production)
-     * [Task 2.5: Weekday vs Weekend Price Analysis](#task-25-weekday-vs-weekend-price-analysis)
-     * [Task 2.6: Battery Revenue Calculation](#task-26-battery-revenue-calculation)
-     * [Task 2.7: Trading Strategy Development](#task-27-trading-strategy-development)
+     * [Task 2.1](#task-21)
+     * [Task 2.2](#task-22)
+     * [Task 2.3](#task-23)
+     * [Task 2.4](#task-24)
+     * [Task 2.5](#task-25)
+     * [Task 2.6](#task-26)
+     * [Task 2.7](#task-27)
 
 ## Background
 This repo consists of solutions for the tasks in [**FlexPower QuantChallenge**](https://github.com/FlexPwr/QuantChallenge). Below are descriptions of each task. 

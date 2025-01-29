@@ -289,3 +289,39 @@ Let me explain why the weekday average price (104.37 EUR/MWh) is significantly h
 The primary reason is industrial, commercial, institutional and educational consumption patterns. During weekdays, industrial facilities, offices, schools, universities, government buildings, and other institutions are operating at full capacity, leading to higher electricity consumption. The collective electricity consumption from these facilities, including their heating, cooling, and operational needs, contributes to higher demand during and consequently higher prices during weekdays. During weekends, most of these facilities are closed or operating at reduced capacity, resulting in reduced demand and lower prices.
 
 Another key factor involves the power system's generation mix and operational strategy. During weekdays, when demand is higher, more expensive peaking power plants need to be activated to meet the increased demand, pushing up prices. These plants often have higher marginal costs and are required to maintain system stability during peak demand periods. During weekends, with lower demand, the system can rely more on baseload and intermediate load plants, which typically have lower operational costs, resulting in lower average prices. This difference in the generation mix between weekdays and weekends directly impacts the market clearing prices.
+
+### [Task 2.6](task-26)
+The goal of this task is to maximize the revenue generated from a 1 MWh battery by strategically charging and discharging it at optimal times. The battery can only be charged and discharged once per day. Obviously the key to maximise revenue is to discharge when the electricity price is highest and charge when it is lowest (Buy Low, Sell High).
+
+A key, albeit obvious, point to note is that we can only discharge the battery if it has been charged beforehand. Our goal is to maximize revenue, and the first step in this process is to identify the highest Day-Ahead Hourly Price, which represents the ideal selling price. The process to find maximum revenue is as follows:
+
+**Identify the Highest Selling Price**:
+For a given day, we find the highest Day-Ahead Price (selling price) and the corresponding hour (discharge hour). For example, if the highest Day-Ahead Price on a given day is 50 EUR/MWh at hour 7, we aim to sell at this price.
+
+**Find the Lowest Buying Price**:
+ Next, we identify the lowest Day-Ahead Price (buying price) before the discharge hour, i.e., between hour 0 and hour 14. For example, if the lowest price in this window is 40 EUR/MWh at hour 4, we aim to buy power at this price.
+
+**Calculate Revenue**:
+   - The revenue for this transaction is the difference between the selling price and the buying price. In this example, the revenue is:
+     ```
+     Revenue = Selling Price - Buying Price
+     Revenue = 50 EUR/MWh - 40 EUR/MWh = 10 EUR
+     ```
+
+**Repeat the Process**:
+We repeat the process for subsequent highest Day-Ahead Prices (i.e the second highest da price) and their corresponding lowest prices before the discharge hour. For example, if the second-highest Day-Ahead Price is 45 EUR/MWh at hour 15, and the corresponding lowest price before hour 15 is 30 EUR/MWh at hour 10, the revenue from this pair is:
+     ```
+     Revenue = 45 EUR/MWh - 30 EUR/MWh = 15 EUR
+     ```
+
+**Select the Optimal Pair**:
+We calculate 12 potential buy-sell pairs for each day (since there are 24 hours in a day), and then choose the pair with the highest revenue.
+
+Caveat: Handling Negative Prices:
+When the Day-Ahead Price is negative, the transaction behaves oppositely:
+* You are paid to purchase power (i.e., a negative price means you receive money to buy power).
+* You must pay to sell power (i.e., a negative price means you pay out of your pocket to sell power).
+
+For our revenue-maximizing strategy, we only consider discharge hours where the price is non-negative (i.e., greater than 0 EUR/MWh). This ensures we avoid paying to sell power, which would reduce the revenue.
+
+Hence, the process to maximizing revenue for each day is to calculate 12 pairs of buy prices, sell prices, charge hours, and discharge hours. We then select the pair that yields the highest revenue.

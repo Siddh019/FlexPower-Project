@@ -453,7 +453,7 @@ With these considerations in mind, I believed the best course of action would be
 
 I decided to start by running a simple regression model:
 
-**Intra T+1 Qtr Price = a₁ + b₁ * Intra Price +  b₂ * DA Price  + b₃ * Wind DA Forecast + b₄ * PV DA Forecast + ε**
+**Intra T+1 Price = a₁ + b₁ * Intra Price +  b₂ * DA Price  + b₃ * Wind DA Forecast + b₄ * PV DA Forecast + ε**
 
 Initially, I applied an OLS (Ordinary Least Squares) regression. The result was an R² score of 0.65, which indicates that 65% of the next day's price could be linearly explained by the variables mentioned above. While this R² score isn’t particularly low, it isn’t extremely high either, which made me suspect that there could be a non-linear relationship between the dependent and independent variables.
 

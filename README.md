@@ -453,7 +453,7 @@ With these considerations in mind, I believed the best course of action would be
 
 I decided to start by running a simple regression model:
 
-**Intra T+1 Qtr Price = a₁ + b₁ * Intra Qtr Price +  b₂ * Intra Hourly Price + b₃ * DA Price + b₄ * Wind DA Forecast + b₅ * PV DA Forecast + ε**
+**Intra T+1 Qtr Price = a₁ + b₁ * Intra Price +  b₂ * DA Price  + b₃ * Wind DA Forecast + b₄ * PV DA Forecast + ε**
 
 Initially, I applied an OLS (Ordinary Least Squares) regression. The result was an R² score of 0.65, which indicates that 65% of the next day's price could be linearly explained by the variables mentioned above. While this R² score isn’t particularly low, it isn’t extremely high either, which made me suspect that there could be a non-linear relationship between the dependent and independent variables.
 
@@ -461,7 +461,7 @@ Additionally, it’s evident that there is a high level of multicollinearity in 
 
 Given this, I decided to try other models to capture potential non-linearity. I tested a Random Forest Regression, Support Vector Regression (SVR), and Gradient Boosting Regression on the following function:
 
-**Intra T+1 Qtr Price = f(Intra Qtr Price, Intra Hourly Price, DA Price, Wind DA Forecast, PV DA Forecast, θ) + ε**
+**Intra T+1 Price = f(Intra Price, DA Price, Wind DA Forecast, PV DA Forecast, θ) + ε**
 
 The best result came from the Random Forest Regression, which I decided to keep in the code, as it provided the best performance. Since running all the models at once can be computationally expensive, I opted to focus on the Random Forest model for efficiency.
 
@@ -469,12 +469,12 @@ Below are code snippets showing how I set up both the OLS regression and the Ran
 ``` python 
 # ### Task 2.7.2: Prediction using OLS Method
 
-# Remove rows with missing 'Intra T+1 Qtr Price' data
-d1_cleaned = d1.dropna(subset=['Intra T+1 Qtr Price (EUR/MWh)'])
+# Remove rows with missing 'Intra T+1 Price' data
+d1_cleaned = d1.dropna(subset=['Intra T+1 Price (EUR/MWh)'])
 
 # Define independent variables (features) and dependent variable (target)
-X = d1_cleaned[['Intra Qtr Price (EUR/MWh)', 'Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
-y = d1_cleaned['Intra T+1 Qtr Price (EUR/MWh)']
+X = d1_cleaned[['Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
+y = d1_cleaned['Intra T+1 Price (EUR/MWh)']
 
 # Add a constant term to the features (for intercept in regression model)
 X = sm.add_constant(X)
@@ -498,9 +498,9 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Re-clean the data and define features and target variable
-d1_cleaned = d1.dropna(subset=['Intra T+1 Qtr Price (EUR/MWh)'])
-X = d1_cleaned[['Intra Qtr Price (EUR/MWh)', 'Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
-y = d1_cleaned['Intra T+1 Qtr Price (EUR/MWh)']
+d1_cleaned = d1.dropna(subset=['Intra T+1 Price (EUR/MWh)'])
+X = d1_cleaned[['Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
+y = d1_cleaned['Intra T+1 Price (EUR/MWh)']
 
 # Split the data into training and test sets (80% train, 20% test)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -514,8 +514,9 @@ fitted_values_rf = rf_model.predict(X)
 print("Fitted values (Random Forest):")
 print(fitted_values_rf)
  ```
-<img width="882" alt="Screenshot 2025-01-30 at 12 58 40 AM" src="https://github.com/user-attachments/assets/5b88cc25-5cd4-489e-a9ea-6a8de8bfe647" />
-<img width="464" alt="Screenshot 2025-01-30 at 12 59 36 AM" src="https://github.com/user-attachments/assets/a21b5c97-849d-4062-8fea-109b3e79d033" />
+<img width="987" alt="Screenshot 2025-01-30 at 3 47 15 PM" src="https://github.com/user-attachments/assets/e6a3bcdc-a70a-4645-8e0c-b94be1341d71" />
+<img width="458" alt="Screenshot 2025-01-30 at 3 47 45 PM" src="https://github.com/user-attachments/assets/7279c73b-17ce-49ae-86eb-aa4dd7e18865" />
+
 
 After obtaining the fitted values, trading decisions were made based on the following two simple rules:
 
@@ -526,12 +527,13 @@ The Profit/Loss (P/L) is calculated as the selling price - buying price.
 
 The results from both the OLS fitted values and the Random Forest regression fitted values are shown below:
 
-* **P/L from OLS method:** 480,416.93 EUR
-* **P/L from Random Forest Regression method:** 1,003,709.19 EUR
+* **P/L from OLS method:** 95452.74 EUR
+* **P/L from Random Forest Regression method:** 233029.94 EUR
 
 Since Random Forest Regression performed better, I’ve calculated performance evaluation metrics for it, and the results are shown below:
 
-<img width="987" alt="Screenshot 2025-01-30 at 1 18 20 AM" src="https://github.com/user-attachments/assets/2995680d-812e-495c-b463-239137e3123f" />
+<img width="990" alt="Screenshot 2025-01-30 at 3 49 04 PM" src="https://github.com/user-attachments/assets/c6f47e2b-8fad-4a03-a719-25d069f27519" />
+
 
 I have also calculated the Intra Qtr Price for 2022-01-01 using both OLS and Random Forest coefficient estimates. Since this is entirely out-of-sample data (no actual price data for 2022-01-01 was available), I encourage you to calculate the Profit/Loss to test the model's performance.
 

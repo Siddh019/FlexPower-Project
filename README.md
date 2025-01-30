@@ -523,7 +523,7 @@ After obtaining the fitted values, trading decisions were made based on the foll
 * If the fitted value > DA Price, then **buy at DA Price** and **sell at Intra T+1 Qtr Price.**
 * If the fitted value < DA Price, then **buy at Intra T+1 Qtr Price** and **sell at DA Price.**
 
-The Profit/Loss (P/L) is calculated as the selling price - buying price.
+The Profit/Loss (P/L) is calculated as the difference between the selling price and the buying price. The reported P/L represents the profit or loss per 1 EUR/MWh traded.
 
 The results from both the OLS fitted values and the Random Forest regression fitted values are shown below:
 

@@ -46,7 +46,7 @@ new_column_names = {
 # Apply new column names to the DataFrame
 d1 = d1.rename(columns=new_column_names)
 
-# Shift the 'Day T' and 'Intra Qtr Price' columns for prediction
+# Shift the 'Day T' and 'Intra Price' columns for prediction
 d1['Day T+1'] = d1['Day T'].shift(-96)  # Shift by 96 rows for hourly prediction
 d1['Intra T+1 Price (EUR/MWh)'] = d1['Intra Price (EUR/MWh)'].shift(-96)
 
@@ -57,7 +57,7 @@ d1.head(100)
 
 # ### Task 2.7.2: Prediction using OLS Method
 
-# Remove rows with missing 'Intra T+1 Qtr Price' data
+# Remove rows with missing 'Intra T+1 Price' data
 d1_cleaned = d1.dropna(subset=['Intra T+1 Price (EUR/MWh)'])
 
 # Define independent variables (features) and dependent variable (target)
@@ -186,7 +186,7 @@ print(sum_result)
 
 # ### Task 2.7.6: Comparing OLS vs RF for out-of-sample-data
 
-# Predicting the Intraday Price Quarterly Hour (in EUR/MWh) for 01-01-2022
+# Predicting the Intraday Price Hourly (in EUR/MWh) for 01-01-2022
 # Extract the independent variables for out-of-sample data (rows 34944 to 35039)
 out_of_sample_data = d1.loc[34944:35039, [
     'Intra Price (EUR/MWh)', 
@@ -218,7 +218,7 @@ comparison_df.set_index('Day T', inplace=True)
 # Display the comparison DataFrame
 print(comparison_df)
 
-# ### Task 2.7.6: Visualising the P/L over time (RF data only)
+# ### Task 2.7.7: Visualising the P/L over time (RF data only)
 
 # Calculate cumulative P/L in EUR 
 d1_cleaned = d1_cleaned.copy()

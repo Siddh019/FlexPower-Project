@@ -449,7 +449,7 @@ Given these uncertainties, I decided to eliminate any ambiguity in my strategy. 
 
 This approach eliminates concerns about settling at imbalance prices, as both legs of the trade are now essentially closed arbitrage trades (buy low, sell high).
 
-With these considerations in mind, I believed the best course of action would be to forecast the next day’s intraday quarter-hourly price using linear regression or non-linear regression techniques (such as machine learning) and make trading decisions based on these forecasts.
+With these considerations in mind, I believed the best course of action would be to forecast the next day’s intraday hourly price using linear regression or non-linear regression techniques (such as machine learning) and make trading decisions based on these forecasts.
 
 I decided to start by running a simple regression model:
 
@@ -520,8 +520,8 @@ print(fitted_values_rf)
 
 After obtaining the fitted values, trading decisions were made based on the following two simple rules:
 
-* If the fitted value > DA Price, then **buy at DA Price** and **sell at Intra T+1 Qtr Price.**
-* If the fitted value < DA Price, then **buy at Intra T+1 Qtr Price** and **sell at DA Price.**
+* If the fitted value > DA Price, then **buy at DA Price** and **sell at Intra T+1 Price.**
+* If the fitted value < DA Price, then **buy at Intra T+1 Price** and **sell at DA Price.**
 
 The Profit/Loss (P/L) is calculated as the difference between the selling price and the buying price. The reported P/L represents the profit or loss per 1 EUR/MWh traded.
 
@@ -535,7 +535,7 @@ Since Random Forest Regression performed better, I’ve calculated performance e
 <img width="990" alt="Screenshot 2025-01-30 at 3 49 04 PM" src="https://github.com/user-attachments/assets/c6f47e2b-8fad-4a03-a719-25d069f27519" />
 
 
-I have also calculated the Intra Qtr Price for 2022-01-01 using both OLS and Random Forest coefficient estimates. Since this is entirely out-of-sample data (no actual price data for 2022-01-01 was available), I encourage you to calculate the Profit/Loss to test the model's performance.
+I have also calculated the Intra Price for 2022-01-01 using both OLS and Random Forest coefficient estimates. Since this is entirely out-of-sample data (no actual price data for 2022-01-01 was available), I encourage you to calculate the Profit/Loss to test the model's performance.
 
 This was a fun project to build and test a trading strategy. I'm not entirely sure if my strategy will actually work in the real world, but I did the best I could within this short week. I'd love to hear your thoughts on it and any suggestions you might have. 
 

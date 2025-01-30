@@ -25,7 +25,6 @@ df['time'] = pd.to_datetime(df['time'], format='%d/%m/%y %H:%M')
 # Select the relevant columns for analysis
 selected_columns = [
     'time',
-    'Intraday Price Price Quarter Hourly  [in EUR/MWh]',
     'Intraday Price Hourly  [in EUR/MWh]',
     'Day Ahead Price hourly [in EUR/MWh]',
     'Wind Day Ahead Forecast [in MW]',
@@ -42,7 +41,6 @@ new_column_names = {
     'PV Day Ahead Forecast [in MW]': 'PV DA Forecast (MW)',
     'Day Ahead Price hourly [in EUR/MWh]': 'DA Price (EUR/MWh)',
     'Intraday Price Hourly  [in EUR/MWh]': 'Intra Price (EUR/MWh)',
-    'Intraday Price Price Quarter Hourly  [in EUR/MWh]': 'Intra Qtr Price (EUR/MWh)'
 }
 
 # Apply new column names to the DataFrame
@@ -50,21 +48,21 @@ d1 = d1.rename(columns=new_column_names)
 
 # Shift the 'Day T' and 'Intra Qtr Price' columns for prediction
 d1['Day T+1'] = d1['Day T'].shift(-96)  # Shift by 96 rows for hourly prediction
-d1['Intra T+1 Qtr Price (EUR/MWh)'] = d1['Intra Qtr Price (EUR/MWh)'].shift(-96)
+d1['Intra T+1 Price (EUR/MWh)'] = d1['Intra Price (EUR/MWh)'].shift(-96)
 
 # Reorder columns for better clarity
-new_order = ['Day T+1', 'Intra T+1 Qtr Price (EUR/MWh)'] + [col for col in d1.columns if col not in ['Day T+1', 'Intra T+1 Qtr Price (EUR/MWh)']]
+new_order = ['Day T+1', 'Intra T+1 Price (EUR/MWh)'] + [col for col in d1.columns if col not in ['Day T+1', 'Intra T+1 Price (EUR/MWh)']]
 d1 = d1[new_order]
 d1.head(100)
 
 # ### Task 2.7.2: Prediction using OLS Method
 
 # Remove rows with missing 'Intra T+1 Qtr Price' data
-d1_cleaned = d1.dropna(subset=['Intra T+1 Qtr Price (EUR/MWh)'])
+d1_cleaned = d1.dropna(subset=['Intra T+1 Price (EUR/MWh)'])
 
 # Define independent variables (features) and dependent variable (target)
-X = d1_cleaned[['Intra Qtr Price (EUR/MWh)', 'Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
-y = d1_cleaned['Intra T+1 Qtr Price (EUR/MWh)']
+X = d1_cleaned[['Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
+y = d1_cleaned['Intra T+1 Price (EUR/MWh)']
 
 # Add a constant term to the features (for intercept in regression model)
 X = sm.add_constant(X)
@@ -93,14 +91,14 @@ condition_buy_at_intra = fitted_values < d1_cleaned['DA Price (EUR/MWh)']
 
 # If fitted value > DA Price, buy at DA Price and sell at Intra Price
 d1_cleaned.loc[condition_buy_at_da, 'buy'] = d1_cleaned.loc[condition_buy_at_da, 'DA Price (EUR/MWh)']
-d1_cleaned.loc[condition_buy_at_da, 'sell'] = d1_cleaned.loc[condition_buy_at_da, 'Intra T+1 Qtr Price (EUR/MWh)']
+d1_cleaned.loc[condition_buy_at_da, 'sell'] = d1_cleaned.loc[condition_buy_at_da, 'Intra T+1 Price (EUR/MWh)']
 
 # If fitted value < DA Price, buy at Intra Price and sell at DA Price
-d1_cleaned.loc[condition_buy_at_intra, 'buy'] = d1_cleaned.loc[condition_buy_at_intra, 'Intra T+1 Qtr Price (EUR/MWh)']
+d1_cleaned.loc[condition_buy_at_intra, 'buy'] = d1_cleaned.loc[condition_buy_at_intra, 'Intra T+1 Price (EUR/MWh)']
 d1_cleaned.loc[condition_buy_at_intra, 'sell'] = d1_cleaned.loc[condition_buy_at_intra, 'DA Price (EUR/MWh)']
 
 # Calculate profit/loss (P/L) as the difference between 'sell' and 'buy' prices
-d1_cleaned['P/L'] = d1_cleaned['sell'] - d1_cleaned['buy']
+d1_cleaned['P/L'] = (d1_cleaned['sell'] - d1_cleaned['buy']) / 4 # Divide by 4 since the DA and Intra Price is constant accross the hour
 
 # Replace NaN values in 'P/L' with 0 where no trade occurred
 d1_cleaned['P/L'] = d1_cleaned['P/L'].fillna(0)
@@ -119,9 +117,9 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Re-clean the data and define features and target variable
-d1_cleaned = d1.dropna(subset=['Intra T+1 Qtr Price (EUR/MWh)'])
-X = d1_cleaned[['Intra Qtr Price (EUR/MWh)', 'Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
-y = d1_cleaned['Intra T+1 Qtr Price (EUR/MWh)']
+d1_cleaned = d1.dropna(subset=['Intra T+1 Price (EUR/MWh)'])
+X = d1_cleaned[['Intra Price (EUR/MWh)', 'DA Price (EUR/MWh)', 'Wind DA Forecast (MW)', 'PV DA Forecast (MW)']]
+y = d1_cleaned['Intra T+1 Price (EUR/MWh)']
 
 # Split the data into training and test sets (80% train, 20% test)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -170,14 +168,14 @@ condition_buy_at_intra_rf = fitted_values_rf < d1_cleaned['DA Price (EUR/MWh)']
 
 # Apply the buy/sell logic for trades based on the RF model predictions
 d1_cleaned.loc[condition_buy_at_da_rf, 'buy'] = d1_cleaned.loc[condition_buy_at_da_rf, 'DA Price (EUR/MWh)']
-d1_cleaned.loc[condition_buy_at_da_rf, 'sell'] = d1_cleaned.loc[condition_buy_at_da_rf, 'Intra T+1 Qtr Price (EUR/MWh)']
+d1_cleaned.loc[condition_buy_at_da_rf, 'sell'] = d1_cleaned.loc[condition_buy_at_da_rf, 'Intra T+1 Price (EUR/MWh)']
 
 # Reverse the logic for the opposite scenario
-d1_cleaned.loc[condition_buy_at_intra_rf, 'buy'] = d1_cleaned.loc[condition_buy_at_intra_rf, 'Intra T+1 Qtr Price (EUR/MWh)']
+d1_cleaned.loc[condition_buy_at_intra_rf, 'buy'] = d1_cleaned.loc[condition_buy_at_intra_rf, 'Intra T+1 Price (EUR/MWh)']
 d1_cleaned.loc[condition_buy_at_intra_rf, 'sell'] = d1_cleaned.loc[condition_buy_at_intra_rf, 'DA Price (EUR/MWh)']
 
 # Calculate profit/loss (P/L) for trades based on Random Forest predictions
-d1_cleaned['P/L'] = d1_cleaned['sell'] - d1_cleaned['buy']
+d1_cleaned['P/L'] = (d1_cleaned['sell'] - d1_cleaned['buy']) / 4  # Divide by 4 since the DA and Intra Price is constant accross the hour
 d1_cleaned['P/L'] = d1_cleaned['P/L'].fillna(0)
 
 # Calculate and print overall strategy performance
@@ -191,7 +189,6 @@ print(sum_result)
 # Predicting the Intraday Price Quarterly Hour (in EUR/MWh) for 01-01-2022
 # Extract the independent variables for out-of-sample data (rows 34944 to 35039)
 out_of_sample_data = d1.loc[34944:35039, [
-    'Intra Qtr Price (EUR/MWh)',
     'Intra Price (EUR/MWh)', 
     'DA Price (EUR/MWh)', 
     'Wind DA Forecast (MW)', 
@@ -210,8 +207,8 @@ ols_fitted_values = model.predict(X_out_of_sample)
 
 # Create a DataFrame to compare the Random Forest and OLS model predictions
 comparison_df = pd.DataFrame({
-    'RF Prediction (Intra T+1 Qtr Price)': rf_predictions,
-    'OLS Fitted Value (Intra T+1 Qtr Price)': ols_fitted_values
+    'RF Prediction (Intra T+1 Price)': rf_predictions,
+    'OLS Fitted Value (Intra T+1 Price)': ols_fitted_values
 })
 
 # Set the 'Day T' column as the index for easy comparison
